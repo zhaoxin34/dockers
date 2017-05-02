@@ -1,0 +1,1 @@
+$EXEC_HOME/bin/kafka-server-start.sh $CNF_DIR/server.properties

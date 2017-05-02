@@ -1,0 +1,46 @@
+{
+    "name": "message",
+    "type": "record",
+    "fields": [{
+            "name": "host",
+            "type": "string",
+            "default": ""
+        }, {
+            "name": "path",
+            "type": "string"
+        }, {
+            "name": "timestamp",
+            "type": "string"
+        }, {
+            "name": "type",
+            "type": "string"
+        }, {
+            "name": "clientip",
+            "type": "string"
+        }, {
+            "name": "verb",
+            "type": "string"
+        }, {
+            "name": "httpversion",
+            "type": "string"
+        }, {
+            "name": "response",
+            "type": "string"
+        }, {
+            "name": "bytes",
+            "type": "string"
+        }, {
+            "name": "referrer",
+            "type": "string"
+        }, {
+            "name": "agent",
+            "type": "string"
+        }, {
+            "name": "request_args",
+            "type": "string"
+        }, {
+            "name": "request_body",
+            "type": "string"
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+docker exec -it kafka /usr/local/kafka/bin/kafka-console-consumer.sh --zookeeper zookeeper:2181 --topic event-ff --from-beginning

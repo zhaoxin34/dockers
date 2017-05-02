@@ -1,0 +1,96 @@
+version: "3"
+services:
+  # -------------------------------------------------------------------------
+  logstash:
+    image: centos7-base
+    container_name: logstash
+    volumes:
+      - ./shell:/root/shell:ro
+      - ./workspace/nginx:/root/workspace/nginx:ro
+      - ./software/logstash-2.4.0:/usr/local/logstash
+    command: ["/bin/bash", "-c", "sh /root/shell/logstash/init.sh"]
+    # command: tail -f /dev/null
+    environment:
+      # - DATA_DIR=......
+      - EXEC_HOME=/usr/local/logstash
+      - INPUT_FILE_PATH=*.log.*
+      - TOPIC_ID=event-ff
+      - BOOTSTRAP_SERVERS=kafka:9092
+    depends_on:
+     - kafka
+    networks:
+      - leads_net
+
+  # -------------------------------------------------------------------------
+  kafka:
+    image: centos7-base
+    container_name: kafka
+    volumes:
+      - ./shell:/root/shell:ro
+      - ./software/kafka_2.11-0.10.0.1:/usr/local/kafka:ro
+    depends_on:
+      - zookeeper
+    command: ["/bin/bash", "-c", "sh /root/shell/kafka/init.sh"]
+    # command: ["/bin/bash", "-c", "tail -f /dev/null"]
+    environment:
+      - PORT=9092
+      - ZOOKEEPER=zookeeper:2181
+      # - DATA_DIR=......
+      - EXEC_HOME=/usr/local/kafka
+      # - LOG_DIR=/root/workspace/kafka/logs
+    networks:
+      - leads_net
+
+  # -------------------------------------------------------------------------
+  zookeeper:
+    image: centos7-base
+    container_name: zookeeper
+    volumes:
+      - ./shell:/root/shell:ro
+      - ./software/zookeeper-3.4.10:/usr/local/zookeeper:ro
+    command: ["/bin/bash", "-c", "sh /root/shell/zookeeper/init.sh"]
+    # command: ["/bin/bash", "-c", "tail -f /dev/null"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    # dns:
+    #   - 8.8.8.8
+    environment:
+      - PORT=2181
+      # - DATA_DIR=......
+      - EXEC_HOME=/usr/local/zookeeper
+    ports:
+      - "2181:2181"
+    # extra_hosts:
+    #  - "somehost:162.242.195.82"
+    #  - "otherhost:50.31.209.229"
+
+    # https://docs.docker.com/engine/reference/builder/#healthcheck
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost"]
+    #   interval: 1m30s
+    #   timeout: 10s
+    #   retries: 3
+    networks:
+      - leads_net
+    # ports:
+    #  - "3000"
+    #  - "3000-3005"
+    #  - "8000:8000"
+    #  - "9090-9091:8080-8081"
+    #  - "49100:22"
+    #  - "127.0.0.1:8001:8001"
+    #  - "127.0.0.1:5000-5010:5000-5010"
+    #  - "6060:6060/udp"
+    # sysctls:
+    #   net.core.somaxconn: 1024
+    #   net.ipv4.tcp_syncookies: 0
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+    # restart: on-failure
+networks:
+  leads_net:
