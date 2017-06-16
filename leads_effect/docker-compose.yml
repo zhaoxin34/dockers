@@ -8,8 +8,8 @@ services:
       - ./shell:/root/shell:ro
       - ./workspace/nginx:/root/workspace/nginx:ro
       - ./software/logstash-2.4.0:/usr/local/logstash
-    command: ["/bin/bash", "-c", "sh /root/shell/logstash/init.sh"]
-    # command: tail -f /dev/null
+    # command: ["/bin/bash", "-c", "sh /root/shell/logstash/init.sh"]
+    command: tail -f /dev/null
     environment:
       # - DATA_DIR=......
       - EXEC_HOME=/usr/local/logstash
