@@ -15,15 +15,22 @@ FROM centos:7
 
 WORKDIR /root
 
-ADD software/jdk1.8.0_101 /usr/local/jdk
-# ADD software/logstash-2.4.0 /usr/local/logstash-2.4.0
-# ADD workspace /root/workspace
-# ADD shell /root/shell
+# ADD software/jdk1.8.0_101 /usr/local/jdk
+# COPY yum.repo.d/* /etc/yum.repo-s.d/
+#
+# ENV JAVA_HOME /usr/local/jdk
+# ENV PATH "$JAVA_HOME/bin/:${PATH}"
+# ENV TZ "Asia/Shanghai"
+# ENV PS1 "[\e[32;1m\u\e[0m@\h \w]\$ "
+#
+# RUN yum install -y tmux telnet wget curl nmap-ncat vim
+# RUN yum install -y epel-release
+# RUN yum install -y nodejs
+# # install gulp
+# RUN npm install --global gulp-cli
 
-ENV JAVA_HOME /usr/local/jdk
-ENV PATH "$JAVA_HOME/bin/:${PATH}"
-ENV PS1 "[\e[32;1m\u\e[0m@\h \w]\$ "
-
+RUN groupadd chaos &&  useradd -g chaos chaos
+#CMD ["/bin/bash", "-c", "su - chaos"]
 CMD ["/bin/bash"]
 
 # # Set the working directory to /app

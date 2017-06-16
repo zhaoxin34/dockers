@@ -1,0 +1,2 @@
+[root@5598560b3df8 ~]$ groupadd chaos
+[root@5598560b3df8 ~]$ useradd -g chaos chaos
