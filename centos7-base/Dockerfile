@@ -17,7 +17,7 @@ WORKDIR /root
 
 ADD software/jdk1.8.0_101 /usr/local/jdk
 ADD software/maven_3.3.9 /usr/local/maven
-COPY yum.repo.d/* /etc/yum.repo-s.d/
+COPY yum.repo.d/* /etc/yum.repos.d/
 # 所有ENV定义到.bash_profile里
 # 运行时的命令行 docker run -it IMAGE_NAME /bin/bash -c "source .bash_profile; /bin/bash"
 # 或者在CMD中制指定.bash_profile
@@ -26,6 +26,7 @@ ENV M2_HOME /usr/local/maven
 ENV PATH "$M2_HOME/bin/:$JAVA_HOME/bin/:${PATH}"
 ENV LANG en_US.UTF-8
 ENV TZ "Asia/Shanghai"
+ENV PS1 "[\u@\[\033[0;33m\]\$(date '+%m%d %H:%M:%S') \e[32;1m\h\e[0m]: \w\n$?>"
 
 RUN yum install -y epel-release
 RUN yum groupinstall -y development tools
