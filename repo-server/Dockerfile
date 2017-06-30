@@ -2,6 +2,8 @@
 # 用于创建一个repo的服务器，方便离线安装服务
 # BUILD: docker build -t repo-server .
 # RUN: docker run -it -p {reportPort}:80 -v {reporDir}:/repo repo-server
+# 使用方法
+# 登录到repo-server yum安装需要的包 然后createrepo  -d /repo 生成包索引
 # **********************************************************************
 
 FROM centos7-base
@@ -16,5 +18,7 @@ ADD ./nginx.conf /etc/nginx/
 USER root
 WORKDIR /root
 
+EXPOSE 80
+STOPSIGNAL SIGTERM
 
-CMD ["/usr/sbin/nginx"]
+CMD ["nginx", "-g", "daemon off;"]

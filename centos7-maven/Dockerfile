@@ -1,15 +1,25 @@
+# 目标：制作一个基础班的centos7
+# 目录：
+#		/usr/local		放置软件
+# 功能：
+#		java支持
+#		时区?
+#		tmux?
+#		vim?
+#		nc telnet wget curl ifconfig
+#
+
 FROM centos7-base
 
-WORKDIR /home/chaos
+# RUN yum install -y vim
 
-# CMD ["/bin/bash", "-c", "su - chaos"]
-#VOLUME ${src_dir}:/home/chaos/src
-# 注：运行时需要挂载工程的src目录到src目录下，如docker run -v /Users/zhaoxin/working/life/datatist/datatist-analyzer/datatist-analyzer-js-tracker/src:/home/chaos/src -it datatist-analyzer-gulp
+WORKDIR /root
 
-# install gulp
-RUN npm install --global gulp-cli
+ADD software/maven_3.3.9 /usr/local/maven
+ENV M2_HOME /usr/local/maven
+ENV PATH "$M2_HOME/bin/:${PATH}"
 
-USER chaos
+#CMD ["/bin/bash", "-c", "su - chaos"]
 CMD ["/bin/bash"]
 
 # # Set the working directory to /app

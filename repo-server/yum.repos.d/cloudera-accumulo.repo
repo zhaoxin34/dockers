@@ -1,6 +1,6 @@
 [cloudera-accumulo]
 # Packages for Cloudera's Distribution of Accumulo, for CDH 5, on RedHat or CentOS 6 x86_64
 name=Cloudera's Distribution of Accumulo, for CDH 5
-baseurl=http://cloudera.proxy.ustclug.org/accumulo-c5/redhat/6/x86_64/cdh/5/
-gpgkey = http://cloudera.proxy.ustclug.org/accumulo-c5/redhat/6/x86_64/cdh/RPM-GPG-KEY-cloudera
+baseurl=http://cloudera.proxy.ustclug.org/accumulo-c5/redhat/7/x86_64/cdh/5/
+gpgkey = http://cloudera.proxy.ustclug.org/accumulo-c5/redhat/7/x86_64/cdh/RPM-GPG-KEY-cloudera
 gpgcheck = 1

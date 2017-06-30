@@ -1,6 +1,0 @@
-[cloudera-gplextras5]
-# Packages for Cloudera's GPLExtras, Version 5, on RedHat or CentOS 6 x86_64
-name=Cloudera's GPLExtras, Version 5
-baseurl=http://192.168.1.105:7777/
-gpgkey = http://cloudera.proxy.ustclug.org/gplextras5/redhat/6/x86_64/gplextras/RPM-GPG-KEY-cloudera
-gpgcheck = 1

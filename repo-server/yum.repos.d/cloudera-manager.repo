@@ -1,5 +1,5 @@
 [cloudera-manager]
 name=Cloudera Manager, Version 5
-baseurl=http://cloudera.proxy.ustclug.org/cm5/redhat/6/x86_64/cm/5/
-gpgkey=http://cloudera.proxy.ustclug.org/cm5/redhat/6/x86_64/cm/RPM-GPG-KEY-cloudera
+baseurl=http://cloudera.proxy.ustclug.org/cm5/redhat/7/x86_64/cm/5/
+gpgkey=http://cloudera.proxy.ustclug.org/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
 gpgcheck = 1
