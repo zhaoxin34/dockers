@@ -1,21 +1,6 @@
 # **** cloudera ****
-# docker build -t cloudera .
-# docker run --privileged=true -it -p 7180:7180 -v /Users/zhaoxin/working/docker_data/cloudera:/data cloudera
-FROM cloudera-base
+# docker build -t cloudera-datanode .
+FROM cloudera-node
 
-ARG MYSQL_HOST=192.168.0.62
-ARG CDH_VERSION=5.11.1
-
-USER root
-WORKDIR /root
-
-ADD ./yum.repos.d/* /etc/yum.repos.d/
-
-RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
-RUN echo "abc123" | passwd --stdin root
-RUN systemctl enable ntpd
-RUN systemctl enable sshd
-
-COPY db.properties /etc/cloudera-scm-server/db.properties
-RUN cd /etc/cloudera-scm-server/ && sed -i "s/{MYSQL_HOST}/${MYSQL_HOST}/g" db.properties
+RUN systemctl disable cloudera-scm-server
 

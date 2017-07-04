@@ -2,5 +2,6 @@
 # Packages for Cloudera's Distribution for Hadoop, Version 5, on RedHat	or CentOS 7 x86_64
 name=Cloudera's Distribution for Hadoop, Version 5
 baseurl={REPO-SERVER-URL}
-gpgkey =http://cloudera.proxy.ustclug.org/cdh5/redhat/7/x86_64/cdh/RPM-GPG-KEY-cloudera
-gpgcheck = 1
+gpgkey =file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+gpgcheck = 0
+

@@ -1,3 +1,4 @@
 ./piwik
+*.tar.gz
 */software
 */.DS_Store

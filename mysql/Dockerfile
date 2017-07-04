@@ -13,6 +13,7 @@ FROM centos7-base
 
 USER root
 WORKDIR /root
+RUN yum clean all && yum makecache
 RUN yum install -y cmake ncurses-devel
 ADD http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.26.tar.gz mysql-5.6.26.tar.gz
 RUN tar xzvf mysql-5.6.26.tar.gz
@@ -39,5 +40,6 @@ RUN cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 ENV PATH $PATH:$HOME/bin:/usr/local/mysql/bin:/usr/local/mysql/lib
 COPY init.sh init.sh
 RUN /etc/init.d/mysqld start && /bin/bash init.sh
+RUN rm -rf ./mysql* /var/cache/*
 # CMD ["/bin/bash", "-c", "source .bash_profile; /bin/bash"]
 CMD ["/bin/sh", "/usr/local/mysql/bin/mysqld_safe", "--datadir=/home/mysql/data",  "--pid-file=/home/mysql/data/969c828be492.pid"]

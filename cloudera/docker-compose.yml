@@ -1,32 +1,40 @@
+# 初始化数据库的方法
+# /usr/./share/cmf/schema/scm_prepare_database.sh mysql -h 192.168.0.62 -uroot -pabc123 --scm-host % scm scm scm
 version: "3"
 services:
-  # -------------------------------------------------------------------------
-  repo-server:
-    image: repo-server
-    container_name: repo-server
-    hostname: repo-server
-    volumes:
-      - /Users/zhaoxin/working/docker_data/repo:/repo
-    ports: ["7777:80"]
-    networks:
-      - cloudera_cluster
-  # -------------------------------------------------------------------------
-  mysql:
-    image: mysql
-    hostname: mysql
-    volumes:
-      - /Users/zhaoxin/working/docker_data/mysql/cloudera:/home/mysql
-    ports: ["3306:3306"]
-    networks:
-      - cloudera_cluster
+  # # -------------------------------------------------------------------------
+  # mysql:
+  #   image: mysql
+  #   hostname: mysql
+  #   # volumes:
+  #   #   - /Users/zhaoxin/working/docker_data/mysql/cloudera:/home/mysql
+  #   ports: ["3306:3306"]
+  #   networks:
+  #     - cloudera_cluster
+  # # # -------------------------------------------------------------------------
+  # # 用于重置数据库
+  # reset:
+  #   build: ./reset
+  #   image: cloudera-reset
+  #   container_name: reset
+  #   hostname: "reset"
+  #   volumes:
+  #     - /Users/zhaoxin/working/docker_data/cloudera:/data
+  #   # command: tail -f /dev/null
+  #   #environment:
+  #   networks:
+  #     - cloudera_cluster
+  #   depends_on:
+  #    - mysql
   # # -------------------------------------------------------------------------
   manager:
     build: ./node
-    image: cloudera-node
+    image: cloudera-manager
     container_name: manager
     hostname: "manager"
     volumes:
       - /Users/zhaoxin/working/docker_data/cloudera:/data
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     # command: tail -f /dev/null
     #environment:
     networks:
@@ -34,16 +42,17 @@ services:
     ports: ["8080:80", "7180:7180", "7182:7182", "7184:7184", "7185:7185"]
     expose: ["22", "3306", "4433", "4434", "7180", "7182", "7184", "7185", "7190", "7191", "8091", "8084", "9000", "9001", "9994", "9995", "9996", "9997", "10101", "8086", "50010", "50075", "50020","8040","3888","60020","53748","13562","2181"]
     privileged: true
-    depends_on:
-     - mysql
+    # depends_on:
+    #  - reset
   # -------------------------------------------------------------------------
   namenode1:
-    build: ./datanode
-    image: cloudera-datanode
+    build: ./node
+    image: cloudera-node
     container_name: namenode1
-    hostname: "datanode1"
+    hostname: "namenode1"
     volumes:
       - /Users/zhaoxin/working/docker_data/cloudera:/data
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     # command: tail -f /dev/null
     #environment:
     networks:
