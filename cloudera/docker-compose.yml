@@ -33,31 +33,63 @@ services:
     container_name: manager
     hostname: "manager"
     volumes:
-      - /Users/zhaoxin/working/docker_data/cloudera:/data
+      # - /Users/zhaoxin/working/docker_data/cloudera:/data
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     # command: tail -f /dev/null
     #environment:
     networks:
       - cloudera_cluster
     ports: ["8080:80", "7180:7180", "7182:7182", "7184:7184", "7185:7185"]
-    expose: ["22", "3306", "4433", "4434", "7180", "7182", "7184", "7185", "7190", "7191", "8091", "8084", "9000", "9001", "9994", "9995", "9996", "9997", "10101", "8086", "50010", "50075", "50020","8040","3888","60020","53748","13562","2181"]
+    # expose: ["22", "3306", "4433", "4434", "7180", "7182", "7184", "7185", "7190", "7191", "8091", "8084", "9000", "9001", "9994", "9995", "9996", "9997", "10101", "8086", "50010", "50075", "50020","8040","3888","60020","53748","13562","2181"]
     privileged: true
     # depends_on:
     #  - reset
   # -------------------------------------------------------------------------
-  namenode1:
+  node1:
     build: ./node
     image: cloudera-node
-    container_name: namenode1
-    hostname: "namenode1"
+    container_name: node1
+    hostname: "node1"
     volumes:
-      - /Users/zhaoxin/working/docker_data/cloudera:/data
+      # - /Users/zhaoxin/working/docker_data/cloudera:/data
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     # command: tail -f /dev/null
     #environment:
     networks:
       - cloudera_cluster
-    expose: ["22", "3306", "4433", "4434", "7180", "7182", "7184", "7185", "7190", "7191", "8091", "8084", "9000", "9001", "9994", "9995", "9996", "9997", "10101", "8086", "50010", "50075", "50020","8040","3888","60020","53748","13562","2181"]
+    # expose: ["22", "3306", "4433", "4434", "7180", "7182", "7184", "7185", "7190", "7191", "8091", "8084", "9000", "9001", "9994", "9995", "9996", "9997", "10101", "8086", "50010", "50075", "50020","8040","3888","60020","53748","13562","2181"]
+    privileged: true
+    depends_on:
+     - manager
+  node2:
+    build: ./node
+    image: cloudera-node
+    container_name: node2
+    hostname: "node2"
+    volumes:
+      # - /Users/zhaoxin/working/docker_data/cloudera:/data
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    # command: tail -f /dev/null
+    #environment:
+    networks:
+      - cloudera_cluster
+    # expose: ["22", "3306", "4433", "4434", "7180", "7182", "7184", "7185", "7190", "7191", "8091", "8084", "9000", "9001", "9994", "9995", "9996", "9997", "10101", "8086", "50010", "50075", "50020","8040","3888","60020","53748","13562","2181"]
+    privileged: true
+    depends_on:
+     - manager
+  node3:
+    build: ./node
+    image: cloudera-node
+    container_name: node3
+    hostname: "node3"
+    volumes:
+      # - /Users/zhaoxin/working/docker_data/cloudera:/data
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    # command: tail -f /dev/null
+    #environment:
+    networks:
+      - cloudera_cluster
+    # expose: ["22", "3306", "4433", "4434", "7180", "7182", "7184", "7185", "7190", "7191", "8091", "8084", "9000", "9001", "9994", "9995", "9996", "9997", "10101", "8086", "50010", "50075", "50020","8040","3888","60020","53748","13562","2181"]
     privileged: true
     depends_on:
      - manager
