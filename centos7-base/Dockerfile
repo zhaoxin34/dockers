@@ -30,6 +30,7 @@ ENV PS1 "[\u@\[\033[0;33m\]\$(date '+%m%d %H:%M:%S') \e[32;1m\h\e[0m]: \w\n$?>"
 
 # RUN yum install -y epel-release
 # RUN yum groupinstall -y "Development Tools"
+RUN yum clean all && yum makecache
 RUN yum install -y autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign
 RUN yum install -y telnet wget curl nmap-ncat vim net-tools rpm-build tree expect
 
