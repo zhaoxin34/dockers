@@ -19,10 +19,10 @@ VOLUME /run /tmp
 USER root
 WORKDIR /root
 # ENV PS1 "[\u@\[\033[0;33m\]\$(date '+%m%d %H:%M:%S') \e[32;1m\h\e[0m]: \w\n$?>"
-ENV REPO_SERVER=192.168.0.62:7777
-RUN rm -rf /etc/yum.repos.d/*
-ADD ./yum.repos.d/* /etc/yum.repos.d/
-RUN cd /etc/yum.repos.d/ && sed -i "s/{REPO-SERVER-URL}/http:\/\/${REPO_SERVER}\//g" cloudera-*
+# ARG REPO_SERVER=192.168.0.62:7777
+# RUN rm -rf /etc/yum.repos.d/*
+# ADD ./yum.repos.d/* /etc/yum.repos.d/
+# RUN cd /etc/yum.repos.d/ && sed -i "s/{REPO-SERVER-URL}/http:\/\/${REPO_SERVER}\//g" cloudera-*
 RUN yum clean all && yum makecache && echo hello
 RUN yum install -y bind-utils chkconfig cyrus-sasl-gssapi cyrus-sasl-plain fuse fuse-libs gcc httpd init-functions libxslt mod_ssl MySQL-python openssl openssl-devel openssl-devel perl portmap psmisc sed service swig zlib
 RUN yum install -y ntp python-devel python-mysql python-setuptools python-xml initscripts
