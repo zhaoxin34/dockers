@@ -3,14 +3,14 @@
 version: "3"
 services:
   # # -------------------------------------------------------------------------
-  # mysql:
-  #   image: mysql
-  #   hostname: mysql
-  #   # volumes:
-  #   #   - /Users/zhaoxin/working/docker_data/mysql/cloudera:/home/mysql
-  #   ports: ["3306:3306"]
-  #   networks:
-  #     - cloudera_cluster
+  mysql:
+    image: mysql
+    hostname: mysql
+    # volumes:
+    #   - /Users/zhaoxin/working/docker_data/mysql/cloudera:/home/mysql
+    ports: ["3306:3306"]
+    networks:
+      - cloudera_cluster
   # # # -------------------------------------------------------------------------
   # # 用于重置数据库
   # reset:
