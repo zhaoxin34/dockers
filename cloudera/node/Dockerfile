@@ -1,6 +1,6 @@
 # **** cloudera ****
 # docker build -t cloudera-datanode .
-FROM cloudera-node
+FROM cloudera-manager
 
 RUN systemctl disable cloudera-scm-server
 
