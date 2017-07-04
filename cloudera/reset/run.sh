@@ -1,2 +1,1 @@
-# docker run --privileged=true -it -v /sys/fs/cgroup:/sys/fs/cgroup:ro -p 7180:7180 cloudera-node
-docker run -it cloudera-reset
+docker run -it cloudera-node /usr/share/cmf/schema/scm_prepare_database.sh mysql -h ${MYSQL_HOST} -uroot -pabc123 --scm-host % scm scm scm
